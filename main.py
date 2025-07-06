@@ -2,14 +2,16 @@ import os
 import time
 from binance.client import Client
 
+# Claves de Binance desde variables de entorno
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET")
 
 client = Client(API_KEY, API_SECRET)
 
+# Parámetros desde variables de entorno
 symbol = "XRPUSDT"
-buy_price = 2.15
-sell_price = 2.25
+buy_price = float(os.getenv("BUY_PRICE", 2.14))    # valor por defecto si no está seteado
+sell_price = float(os.getenv("SELL_PRICE", 2.16))  # idem
 
 def get_price():
     ticker = client.get_symbol_ticker(symbol=symbol)
